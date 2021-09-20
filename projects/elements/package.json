@@ -1,0 +1,22 @@
+{
+  "name": "wc-surveyjs-ng",
+  "version": "0.1.1",
+  "description": "A SurveyJS web component made with Angular",
+  "exports": {
+    ".": "./elements.js",
+    "./*": "./*.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NEU-ABLE-LAB/wc-surveyjs-ng.git"
+  },
+  "author": "Michael B Kane",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NEU-ABLE-LAB/wc-surveyjs-ng/issues"
+  },
+  "homepage": "https://github.com/NEU-ABLE-LAB/wc-surveyjs-ng#readme"
+}
