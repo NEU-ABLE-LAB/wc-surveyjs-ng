@@ -1,4 +1,19 @@
+<h1>Web Component (Custom Element)</h1>
+<wc-surveyjs></wc-surveyjs>
 
-    <h1>Web Component (Costum Elements)</h1>
-    <wc-surveyjs></wc-surveyjs>
-
+<h1>Web Component in a Shadow DOM</h1>
+<script>
+    class CreateShadowDom extends HTMLElement {
+      constructor() {
+        super();
+        
+        const shadow = this.attachShadow({ mode: "open" });
+        
+        const child = document.createElement("wc-surveyjs");
+        shadow.append(child);
+        
+      }
+    }
+    customElements.define("survey-shadow", CreateShadowDom);
+</script>
+<survey-shadow></survey-shadow>

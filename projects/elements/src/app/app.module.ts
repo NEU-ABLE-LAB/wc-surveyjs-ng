@@ -15,8 +15,18 @@ export class AppModule {
   constructor(private injector: Injector){}
 
   ngDoBootstrap(){
-    const element = createCustomElement(SurveyComponent, { injector: this.injector })
-    customElements.define("wc-surveyjs", element);
+
+    const element = createCustomElement(
+      SurveyComponent, 
+      { injector: this.injector }
+    
+      )
+
+    customElements.define(
+      "wc-surveyjs", 
+      element
+    );
+
   }
 
  }

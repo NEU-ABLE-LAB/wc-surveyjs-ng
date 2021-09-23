@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnInit } from "@angular/core";
+import { Component, Input, ElementRef, EventEmitter, Output, OnInit } from "@angular/core";
 
 import * as Survey from "survey-angular";
 
@@ -16,7 +16,9 @@ export class SurveyComponent implements OnInit {
   @Input()
   result: any;
 
-  constructor() { }
+  constructor(public element: ElementRef) {
+    this.element.nativeElement // <- your direct element reference 
+  }
 
   ngOnInit() {
         
@@ -25,7 +27,7 @@ export class SurveyComponent implements OnInit {
         { 
           type: "radiogroup", 
           name: "car", 
-          title: "What car are you driving?", 
+          title: "Which car are you driving?", 
           isRequired: true, 
           colCount: 4, 
           choices: ["None", "Ford", "Vauxhall", "Volkswagen", "Nissan", "Audi", "Mercedes-Benz", "BMW", "Peugeot", "Toyota", "Citroen"] 
@@ -33,7 +35,11 @@ export class SurveyComponent implements OnInit {
       ]
     };
 
-    const survey = new Survey.Model(json);
+    // Get element in to apply survey to (needed for shadow DOMs)
+    //  https://stackoverflow.com/a/32709672/6661759
+    const surveyElement = this.element.nativeElement;
+
+    const survey = new Survey.Model(json, surveyElement);
 
     Survey.SurveyNG.render("surveyElement", { model: survey });
   }

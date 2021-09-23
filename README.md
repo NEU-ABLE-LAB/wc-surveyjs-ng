@@ -1,40 +1,32 @@
 # SurveyJS Web Component created with Angular Elements
 
+Two Angular projects are contained herein: `components` and `elements`. The `components` project creates an Angular Component that contains [SurveyJS](surveyjs.io/). This component is consumed by the `elements` project transforming it into an Angular Element (aka [web component](https://www.webcomponents.org/introduction));
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
-## Working with the Angular Component
+## Development
 
-### Development server for Angular Component
+The primary purpose of this is to produce a SurveyJS webcomponent. The Angular component is simply a perhaps useful byproduct that must be built to produce the web component.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Watch server
 
-### Build Angular Component
+The following will locally serve the web component for development purposes. We need to run two builders since the component must be built before building the element.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+In one shell, run `npm run watch:components`. This will continuously rebuild the component as the source files in `projects/components` are changed. Keep this shell open and running. Note, this command does not create any web server.
 
-### Running unit tests on Angular Component
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-### Running end-to-end tests on Angular Component
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Working with the Angular Element (aka Web Component)
-
-### Development server for Web Component
-
-Run `npm run start:elements` to build the element and serve the distributable. Note that this only "looks for updates" of the files in the `dist/elements/` directory. Changes made to `src/` or `projects/` files require re-running this command.
+In another shell, run `npm run watch:elements`. This will continuously rebuild the component as the source files in `projects/components` are changed. Keep this shell open and running. This will also create a local web server to view the test page locally. See the command output for port number.
 
 ### Build the Web Component
 
-Run `npm run build:elements` to build the `dist/elements/` directory that contains the following (among others):
+Run `npm run build:elements` to build the `dist/elements/` directory that contains the following files (among others). This will also build the Angular component. 
 
 * `elements.js`: The definition of the element. This must be imported when using the web component. This is a concatenation of `main.js`, `polyfills.js`, and `runtime.js` files that are also in this folder.
 * `package.json`: The npm package description. When the web component is used in a project that uses rollup, this file is necessary for rollup to find dependencies.
 * `index.html`: a demo page of the web component
 
 *NOTE*: If using a Windows Machine, this command must be run in bash or WSL since it uses the non-Windows-native `cat` command.
+
+View the web component on a test server by running `npm run serve:elements`.
 
 ### Publish the Web Component
 
