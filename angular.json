@@ -26,10 +26,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css",
-              "survey-angular/modern.css"
-            ],
+            "styles": [],
             "scripts": []
           },
           "configurations": {
@@ -109,10 +106,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css",
-              "survey-angular/modern.css"
-            ],
+            "styles": [],
             "scripts": []
           }
         }
@@ -172,10 +166,7 @@
               "projects/elements/src/favicon.ico",
               "projects/elements/src/assets"
             ],
-            "styles": [
-              "projects/elements/src/styles.css",
-              "survey-angular/modern.css"
-            ],
+            "styles": [],
             "scripts": []
           },
           "configurations": {
@@ -255,10 +246,7 @@
               "projects/elements/src/favicon.ico",
               "projects/elements/src/assets"
             ],
-            "styles": [
-              "projects/elements/src/styles.css",
-              "survey-angular/modern.css"
-            ],
+            "styles": [],
             "scripts": []
           }
         }

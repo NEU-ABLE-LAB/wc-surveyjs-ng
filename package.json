@@ -1,18 +1,18 @@
 {
   "name": "wc-surveyjs-ng",
-  "version": "0.1.1",
+  "version": "0.3.0",
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
-    "serve:elements": "serve ./dist/elements",
+    "serve:elements": "ng build --project components && ng build --project elements --output-hashing none && npm run pack:elements && cp projects/elements/package.json dist/elements&& cp projects/elements/readme.md dist/elements && serve ./dist/elements",
     "build": "ng build",
-    "build:elements": "ng build --project components && ng build --project elements --output-hashing none && npm run pack:elements && cp projects/elements/package.json dist/elements&& cp projects/elements/readme.md dist/elements",
+    "build:components": "ng build --project components",
+    "build:elements": "ng build --project elements --output-hashing none && npm run pack:elements && cp projects/elements/package.json dist/elements&& cp projects/elements/readme.md dist/elements",
     "pack:elements": "cat ./dist/elements/{runtime,polyfills,main}.js > dist/elements/elements.js && ls -lah dist/elements/elements.js",
     "watch": "ng build --watch --configuration development",
     "watch:components": "ng build --project components --watch --configuration development",
     "watch:elements": "ng serve --project elements --watch --configuration development",
-    "test": "ng test",
-    "build:components": "ng build --project components"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
