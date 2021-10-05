@@ -1,6 +1,40 @@
 import { Component, Input, ElementRef, ViewEncapsulation, EventEmitter, Output, OnInit } from "@angular/core";
 
 import * as Survey from "survey-angular";
+import * as jsonData from "projects/components/src/form.json"
+
+interface JsonFormValidators {
+  min?: number;
+  max?: number;
+  required?: boolean;
+  requiredTrue?: boolean;
+  email?: boolean;
+  minLength?: boolean;
+  maxLength?: boolean;
+  pattern?: string;
+  nullValidator?: boolean;
+}
+
+interface JsonFormControlOptions {
+  min?: string;
+  max?: string;
+  step?: string;
+  icon?: string;
+}
+
+interface JsonFormControls {
+  name: string;
+  label: string;
+  value: string;
+  type: string;
+  options?: JsonFormControlOptions;
+  required: boolean;
+  validators: JsonFormValidators;
+}
+
+export interface JsonFormData {
+  controls: JsonFormControls[];
+}
 
 @Component({
   selector: 'wc-surveyjs',
@@ -12,8 +46,7 @@ import * as Survey from "survey-angular";
 })
 export class SurveyComponent implements OnInit {
   @Output() submitSurvey = new EventEmitter<any>();
-  @Input()
-  result: any;
+  @Input() jsonFormData: any;
 
   constructor(public element: ElementRef) {
     this.element.nativeElement
@@ -23,26 +56,16 @@ export class SurveyComponent implements OnInit {
 
     Survey.StylesManager.applyTheme("modern");
 
-    const json = { 
-      questions: [
-        { 
-          type: "radiogroup", 
-          name: "car", 
-          title: "What car are you driving?", 
-          isRequired: true, 
-          colCount: 4, 
-          choices: ["None", "Ford", "Vauxhall", "Volkswagen", "Nissan", "Audi", "Mercedes-Benz", "BMW", "Peugeot", "Toyota", "Citroen"] 
-        }
-      ]
-    };
+    
 
     // Get element in to apply survey to (needed for shadow DOMs)
     //  https://stackoverflow.com/a/32709672/6661759
     const surveyElement = this.element.nativeElement.shadowRoot.querySelector('#surveyContainer');
 
     const survey = new Survey.Model(
-      json, 
-      surveyElement
+      this.jsonFormData,
+       
+      // surveyElement
     );
 
     Survey.SurveyNG.render("surveyElement", { model: survey });
