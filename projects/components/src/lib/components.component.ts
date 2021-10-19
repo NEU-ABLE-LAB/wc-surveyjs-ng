@@ -12,7 +12,9 @@ import * as Survey from "survey-angular";
 })
 export class SurveyComponent implements OnInit {
   @Output() submitSurvey = new EventEmitter<any>();
-  @Input()
+  @Input('type') props: {}
+  questionType: string;
+  
   result: any;
 
   constructor(public element: ElementRef) {
@@ -26,9 +28,9 @@ export class SurveyComponent implements OnInit {
     const json = { 
       questions: [
         { 
-          type: "radiogroup", 
-          name: "car", 
-          title: "What car are you driving?", 
+          type: this.questionType, 
+          name: 'car', 
+          title: 'What car are you driving?', 
           isRequired: true, 
           colCount: 4, 
           choices: ["None", "Ford", "Vauxhall", "Volkswagen", "Nissan", "Audi", "Mercedes-Benz", "BMW", "Peugeot", "Toyota", "Citroen"] 
@@ -42,7 +44,7 @@ export class SurveyComponent implements OnInit {
 
     const survey = new Survey.Model(
       json, 
-      surveyElement
+      // surveyElement
     );
 
     Survey.SurveyNG.render("surveyElement", { model: survey });
