@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewEncapsulation, EventEmitter, Output, OnInit } from "@angular/core";
+import { Component, Input, ElementRef, ViewEncapsulation, EventEmitter, Output, OnInit, OnChanges, SimpleChange, SimpleChanges } from "@angular/core";
 
 import * as Survey from "survey-angular";
 
@@ -10,10 +10,16 @@ import * as Survey from "survey-angular";
   ],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class SurveyComponent implements OnInit {
-  @Output() submitSurvey = new EventEmitter<any>();
-  @Input('type') props: {}
-  questionType: string;
+export class SurveyComponent implements OnInit, OnChanges {
+  @Output()
+  private _submitSurvey = new EventEmitter<any>();
+  public get submitSurvey() {
+    return this._submitSurvey;
+  }
+  public set submitSurvey(value) {
+    this._submitSurvey = value;
+  }
+  @Input('string') jsonString: string; 
   
   result: any;
 
@@ -21,32 +27,25 @@ export class SurveyComponent implements OnInit {
     this.element.nativeElement
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+
+ 
+  }
   ngOnInit() {
-
     Survey.StylesManager.applyTheme("modern");
-
-    const json = { 
-      questions: [
-        { 
-          type: this.questionType, 
-          name: 'car', 
-          title: 'What car are you driving?', 
-          isRequired: true, 
-          colCount: 4, 
-          choices: ["None", "Ford", "Vauxhall", "Volkswagen", "Nissan", "Audi", "Mercedes-Benz", "BMW", "Peugeot", "Toyota", "Citroen"] 
-        }
-      ]
-    };
-
-    // Get element in to apply survey to (needed for shadow DOMs)
-    //  https://stackoverflow.com/a/32709672/6661759
-    const surveyElement = this.element.nativeElement.shadowRoot.querySelector('#surveyContainer');
-
-    const survey = new Survey.Model(
-      json, 
-      // surveyElement
-    );
-
-    Survey.SurveyNG.render("surveyElement", { model: survey });
+       // const json = JSON.parse(this.jsonString)
+       
+      const json = JSON.parse(this.jsonString);
+      
+       // Get element in to apply survey to (needed for shadow DOMs)
+       //  https://stackoverflow.com/a/32709672/6661759
+       const surveyElement = this.element.nativeElement.shadowRoot.querySelector('#surveyContainer');
+   
+       const survey = new Survey.Model(
+         json, 
+         surveyElement
+       );
+   
+       Survey.SurveyNG.render("surveyElement", { model: survey });
   }
 }
